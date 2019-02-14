@@ -1,12 +1,42 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const TimerContainer = styled.div`
-	background: #f00;
-	flex: 2;
+import Countdown from './Countdown';
+import Settings from './Settings';
+
+const TimerWrapper = styled.div`
+	display: flex;
+	align-items: center;
 `;
 
 class Timer extends Component {
+	/**
+	 * state
+	 *
+	 * @type {obj}
+	 */
+	state = {
+		rounds: 0,
+		roundTime: '00:00',
+		restTime: '00:00',
+		warmupTime: '00:00',
+		roundEndWarningTime: '00:00',
+		currentRound: 0,
+	};
+
+	/**
+	 * updateSetting
+	 *
+	 * @param {string} setting
+	 * @param {any} value
+	 * @returns {void}
+	 */
+	updateSetting = (setting, value) => {
+		this.setState({
+			[setting]: value,
+		});
+	};
+
 	/**
 	 * render
 	 *
@@ -14,9 +44,10 @@ class Timer extends Component {
 	 */
 	render() {
 		return (
-			<TimerContainer>
-				Timer
-			</TimerContainer>
+			<TimerWrapper>
+				<Countdown />
+				<Settings updateSetting={this.updateSetting} />
+			</TimerWrapper>
 		);
 	}
 }
